@@ -5,16 +5,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import axios from 'axios';
 import callApi from './../../utils/apiCaller';
-import   {actFetchProductsRequest}  from '../../actions/index';
+import   {actFetchProductsRequest, actDEleteProductRequest}  from '../../actions/index';
 
 class ProductListPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            products : []
-        }
-        
-    }
+
     componentDidMount() {
         callApi('products','GET',null).then(res => {
             // this.setState({
@@ -40,36 +34,10 @@ class ProductListPage extends Component {
     }
     
     deleteItem = (product) => {
-        // let { products } = this.state;
-        let { products } = this.props;
         let id = product.id
         if(confirm('bạn chắc chắn muốn xoá ?')) { //eslint-disable-line
-            callApi(`products/${id}`,'DELETE',null).then(res => {
-                // callApi('products','GET',null).then(res => {
-                //     this.setState({
-                //         products: res.data
-                //     })
-                // })
-                if(res.status === 200) {
-                    let index = this.findIndex(products,id);
-                    if(index !== -1) {
-                        products.splice(index,1);
-                        this.setState({
-                            products : products
-                        })
-                    }
-                }
-            })
-        }  
-    }
-    findIndex = (products,id) => {
-        var result = -1;
-        products.forEach((product,index) => {
-            if(product.id === id) {
-                result = index;
-            }
-        });
-        return result
+            this.props.onDeleteProduct(id);
+        }
     }
     render() {
         // let {products} = this.state;
@@ -85,7 +53,6 @@ class ProductListPage extends Component {
             </div>
         );
     }
-
 }
 
 
@@ -99,6 +66,9 @@ const mapDispatchToProps = (dispatch,props) => {
     return {
         fetchAllProducts : () => {
             dispatch(actFetchProductsRequest())
+        },
+        onDeleteProduct : (id) => {
+            dispatch(actDEleteProductRequest(id))
         }
     }
 }
