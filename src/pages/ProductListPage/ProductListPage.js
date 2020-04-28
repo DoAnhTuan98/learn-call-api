@@ -10,6 +10,7 @@ import   {actFetchProductsRequest, actDEleteProductRequest}  from '../../actions
 class ProductListPage extends Component {
 
     componentDidMount() {
+        console.log('2')
         callApi('products','GET',null).then(res => {
             // this.setState({
             //     products: res.data
@@ -40,6 +41,7 @@ class ProductListPage extends Component {
         }
     }
     render() {
+        console.log('1');
         // let {products} = this.state;
         let { products } = this.props;
         return (

@@ -43,7 +43,7 @@ class ProductActionPage extends Component {
         let { match } = this.props;
         if(match) {
             let id = match.params.id;
-            this.props.onEditProduct(id);
+            this.props.onGetProduct(id);
         }
     }
 
@@ -113,7 +113,7 @@ const mapDispatchToProps = (dispatch,props) => {
         onAddProduct : (product) => {
             dispatch(actAddProductRequest(product))
         },
-        onEditProduct : (id) => {
+        onGetProduct : (id) => {
             dispatch(actGetProductRequest(id))
         },
         onUpdateProduct : (product) => {

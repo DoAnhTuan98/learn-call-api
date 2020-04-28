@@ -18,7 +18,7 @@ export const actFetchProducts = (products) => {
 
 export const actDEleteProductRequest = (id) => {
     return (dispatch) => {
-        return callApi(`products/${id}`,'DELETE',null).then(res => {
+        callApi(`products/${id}`,'DELETE',null).then(res => {
             dispatch(actDEleteProduct(id))
         })
     }
