@@ -15,6 +15,11 @@ const menus = [
         name: 'Quản lý sản phẩm',
         to: '/product-list',
         exact: false
+    },
+    {
+        name: 'Đăng nhập',
+        to: '/login',
+        exact: false
     }
 ]
 
@@ -35,16 +40,16 @@ class Menu extends Component {
     showMenus = (menus) => {
         let result = null;
         if (menus.length > 0) {
-            result = menus.map((menu,index) => {
-                return <MenuLink 
-                            label={menu.name} 
-                            to={menu.to} 
-                            activeOnlyWhenExact={menu.exact} 
-                            key={index} />
+            result = menus.map((menu, index) => {
+                return <MenuLink
+                    label={menu.name}
+                    to={menu.to}
+                    activeOnlyWhenExact={menu.exact}
+                    key={index} />
             })
         }
         return result;
-    } 
+    }
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light mb-10">

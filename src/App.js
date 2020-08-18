@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import routes from './routes';
 
-
 class App extends Component {
     showContentMenus = (routes) => {
         var result = null;
@@ -32,7 +31,7 @@ class App extends Component {
                 <div>
                     <Menu />
                     <div className="container">
-                        <div className="row">
+                        <div className="row login">
                             {/* <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <button type="button" className="btn btn-primary mb-10">
                                     Thêm sản phẩm

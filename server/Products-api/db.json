@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "id": 5,
+      "name": "iphone 10",
+      "price": "1222222",
+      "status": true
+    },
+    {
+      "id": 6,
+      "name": "ip xs max",
+      "price": "20000000",
+      "status": true
+    },
+    {
+      "id": 7,
+      "name": "iphone 8",
+      "price": "122131312",
+      "status": ""
+    }
+  ]
+}

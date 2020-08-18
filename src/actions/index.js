@@ -2,68 +2,67 @@ import * as Types from './../constants/ActionTypes';
 import callApi from '../utils/apiCaller';
 
 export const actFetchProductsRequest = () => {
-    return (dispatch) => {
-        return callApi('products','GET',null).then(res => {
-            dispatch(actFetchProducts(res.data))
-        })
+    return async (dispatch) => {
+        const res = await callApi('product', 'GET', null);
+        dispatch(actFetchProducts(res.data));
     }
 };
 
 export const actFetchProducts = (products) => {
     return {
-        type : Types.FETCH_PRODUCTS,
+        type: Types.FETCH_PRODUCTS,
         products
     }
 };
 
 export const actDEleteProductRequest = (id) => {
-    return (dispatch) => {
-        callApi(`products/${id}`,'DELETE',null).then(res => {
-            dispatch(actDEleteProduct(id))
-        })
+    return async (dispatch) => {
+        const res = await callApi(`product/${id}`, 'DELETE', null);
+        dispatch(actDEleteProduct(id));
     }
 };
 
 export const actDEleteProduct = (id) => {
     return {
-        type : Types.DELETE_PRODUCT,
+        type: Types.DELETE_PRODUCT,
         id
     }
 };
 
 export const actAddProductRequest = (product) => {
-    return (dispatch) => {
-        return callApi(`products`,'POST',product).then(res => {
-            dispatch(actAddProduct(res.data))
-        });
+    if (!product.status) {
+        product.status = false
+    }
+    return async (dispatch) => {
+        const res = await callApi('product', 'POST', product);
+        dispatch(actAddProduct(res.data));
     }
 }
 
 export const actAddProduct = (product) => {
     return {
-        type : Types.ADD_PRODUCT,
+        type: Types.ADD_PRODUCT,
         product
     }
 };
 
 export const actGetProductRequest = (id) => {
-    return (dispatch) => {
-        return callApi(`products/${id}`,'GET',null).then(res => {
-            dispatch(actGetProduct(res.data))
-        })
+    return async (dispatch) => {
+        const res = await callApi(`product/${id}`, 'GET', null);
+        dispatch(actGetProduct(res.data));
     }
 };
 
 export const actGetProduct = (product) => {
     return {
-        type : Types.EDIT_PRODUCT,
+        type: Types.EDIT_PRODUCT,
         product
     }
 }
 
 export const actUpdateProductRequest = (product) => {
     return (dispatch) => {
-        callApi(`products/${product.id}`,'PUT',product).then(res => {
+        callApi(`product/${product.id}`, 'PUT', product).then(res => {
             dispatch(actUpdateProduct(res.data))
         })
     }
@@ -71,8 +70,33 @@ export const actUpdateProductRequest = (product) => {
 
 export const actUpdateProduct = (product) => {
     return {
-        type : Types.UPDATE_PRODUCT,
+        type: Types.UPDATE_PRODUCT,
         product
     }
 }
 
+export const filterNameProductRequest = (name, status) => {
+    return async (dispatch) => {
+        let res = await callApi(`product?name=${name}&status=${status}`, 'GET', null)
+        dispatch(filterNameProduct(res.data))
+    }
+}
+
+export const filterNameProduct = (products) => {
+    return {
+        type: Types.FILTER_NAME_PRODUCT,
+        products
+    }
+}
+
+export const onLoginSuccess = () => {
+    return {
+        type: Types.STATUS_LOGIN_TRUE
+    }
+}
+
+export const onLoginFail = () => {
+    return {
+        type: Types.STATUS_LOGIN_FALSE
+    }
+}
